@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Gracias por tu compra — Desde el Corazón de Casa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Karla:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#211C18;
+  --night:#1E2A2E;
+  --night2:#152022;
+  --paper:#F8F3E9;
+  --lamp:#D69A42;
+  --lamp2:#F0C47C;
+  --line:rgba(33,28,24,.14);
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:'Karla',Arial,sans-serif;
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+h1{font-family:'Fraunces',Georgia,serif;line-height:1.08;margin:0}
+.page{
+  min-height:100vh;
+  display:grid;
+  place-items:center;
+  padding:42px 20px;
+  background:
+    radial-gradient(circle at 80% 8%,rgba(214,154,66,.16),transparent 32%),
+    linear-gradient(180deg,var(--night),var(--night2));
+}
+.card{
+  width:min(680px,100%);
+  background:var(--paper);
+  border-radius:22px;
+  padding:42px 38px;
+  text-align:center;
+  box-shadow:0 30px 90px rgba(0,0,0,.28);
+}
+.eyebrow{
+  font-size:.78rem;
+  text-transform:uppercase;
+  letter-spacing:.11em;
+  font-weight:700;
+  color:var(--lamp);
+  margin-bottom:14px;
+}
+h1{font-size:clamp(2.15rem,7vw,3.65rem)}
+.lead{
+  font-size:1.07rem;
+  color:rgba(33,28,24,.72);
+  margin:20px auto 28px;
+  max-width:34rem;
+}
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:100%;
+  min-height:56px;
+  padding:15px 24px;
+  border-radius:9px;
+  background:var(--lamp);
+  color:#1b140b;
+  text-decoration:none;
+  font-weight:700;
+  font-size:1rem;
+  transition:background .15s ease,transform .1s ease;
+}
+.btn:hover{background:var(--lamp2)}
+.btn:active{transform:scale(.985)}
+.help{
+  margin:22px 0 0;
+  font-size:.9rem;
+  color:rgba(33,28,24,.62);
+}
+.help a{color:var(--ink);font-weight:700}
+@media(max-width:600px){
+  .page{padding:24px 14px}
+  .card{padding:32px 22px}
+}
+</style>
+</head>
+<body>
+<main class="page">
+  <section class="card">
+    <div class="eyebrow">Gracias por tu compra</div>
+    <h1>Ya diste el primer paso para volver a acercarte.</h1>
+    <p class="lead">Tu acceso ya está listo. En la carpeta encontrarás todos los materiales de <strong>Mamá, papá, tengo que contarte algo</strong> para verlos online o descargarlos.</p>
+
+    <a class="btn" href="https://drive.google.com/drive/folders/1KbRpdf_cDpbQ-ZuDHgvmLr1Ppoyju02M?usp=sharing" target="_blank" rel="noopener noreferrer">Acceder a mis materiales →</a>
+
+    <p class="help">Si tienes alguna duda o necesitas ayuda con el acceso, escríbenos a <a href="mailto:desdeecorazondecasa@gmail.com">desdeecorazondecasa@gmail.com</a>.</p>
+  </section>
+</main>
+</body>
+</html>
