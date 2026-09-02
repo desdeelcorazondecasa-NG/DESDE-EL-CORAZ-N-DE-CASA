@@ -1,64 +1,27 @@
 <!doctype html>
 <html lang="es">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <title>Gracias por tu compra — Desde el Corazón de Casa</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Karla:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--ink:#211C18;--night:#1E2A2E;--night2:#152022;--paper:#F8F3E9;--paper2:#EFE5D2;--lamp:#D69A42;--lamp2:#F0C47C;--sage:#4D6254;--danger:#B5533C;--line:rgba(33,28,24,.14)}
-*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:'Karla',Arial,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}h1,h2,h3{font-family:'Fraunces',Georgia,serif;line-height:1.1;margin:0}.page{min-height:100vh;display:grid;place-items:center;padding:42px 20px;background:radial-gradient(circle at 80% 8%,rgba(214,154,66,.16),transparent 32%),linear-gradient(180deg,var(--night),var(--night2))}.card{width:min(720px,100%);background:var(--paper);border-radius:22px;padding:38px;box-shadow:0 30px 90px rgba(0,0,0,.28);border:1px solid rgba(255,255,255,.08)}.eyebrow{font-size:.78rem;text-transform:uppercase;letter-spacing:.11em;font-weight:700;color:var(--lamp);margin-bottom:12px}.card h1{font-size:clamp(2.15rem,7vw,3.7rem)}.lead{font-size:1.08rem;color:rgba(33,28,24,.72);margin:18px 0 24px}.status{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;margin:22px 0}.status strong{display:block;margin-bottom:4px}.btn{display:inline-flex;align-items:center;justify-content:center;min-height:54px;padding:15px 22px;border-radius:9px;text-decoration:none;font-weight:700;border:0;cursor:pointer;width:100%;background:var(--lamp);color:#1b140b}.btn:hover{background:var(--lamp2)}.btn.secondary{background:#fff;border:1px solid var(--line);margin-top:10px}.help{font-size:.88rem;color:rgba(33,28,24,.62);margin:20px 0 0}.help a{font-weight:700}.hidden{display:none!important}.loader{width:26px;height:26px;border:3px solid rgba(33,28,24,.15);border-top-color:var(--lamp);border-radius:50%;animation:spin .8s linear infinite;margin-bottom:11px}@keyframes spin{to{transform:rotate(360deg)}}.success-box{background:#e8f0e7;border:1px solid rgba(77,98,84,.22);border-radius:14px;padding:19px;margin:22px 0}.warning-box{background:#fff4df;border:1px solid rgba(214,154,66,.32);border-radius:14px;padding:19px;margin:22px 0}.error-box{background:#f5e7e3;border:1px solid rgba(181,83,60,.25);border-radius:14px;padding:19px;margin:22px 0}@media(max-width:600px){.card{padding:28px 22px}.page{padding:24px 14px}}
+:root{--ink:#211C18;--night:#1E2A2E;--night2:#152022;--paper:#F8F3E9;--lamp:#D69A42;--lamp2:#F0C47C;--line:rgba(33,28,24,.14)}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:'Karla',Arial,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}h1{font-family:'Fraunces',Georgia,serif;line-height:1.08;margin:0}.page{min-height:100vh;display:grid;place-items:center;padding:42px 20px;background:radial-gradient(circle at 80% 8%,rgba(214,154,66,.16),transparent 32%),linear-gradient(180deg,var(--night),var(--night2))}.card{width:min(680px,100%);background:var(--paper);border-radius:22px;padding:42px;box-shadow:0 30px 90px rgba(0,0,0,.28);text-align:center}.eyebrow{font-size:.78rem;text-transform:uppercase;letter-spacing:.11em;font-weight:700;color:var(--lamp);margin-bottom:14px}.card h1{font-size:clamp(2.15rem,7vw,3.5rem)}.lead{font-size:1.08rem;color:rgba(33,28,24,.72);margin:18px auto 28px;max-width:34em}.btn{display:inline-flex;align-items:center;justify-content:center;min-height:56px;padding:16px 24px;border-radius:9px;text-decoration:none;font-weight:700;width:100%;background:var(--lamp);color:#1b140b}.btn:hover{background:var(--lamp2)}.help{font-size:.9rem;color:rgba(33,28,24,.62);margin:20px 0 0}.help a{font-weight:700;color:inherit}@media(max-width:600px){.card{padding:30px 22px}.page{padding:24px 14px}}
 </style>
 </head>
 <body>
-<main class="page"><section class="card">
-  <div class="eyebrow">Compra recibida</div>
-  <h1>Elegiste acercarte. Ahora tienes un mapa para hacerlo.</h1>
-  <p class="lead">Gracias por confiar en <strong>Desde el Corazón de Casa</strong>. Estamos verificando tu pago con Mercado Pago para darte acceso a los materiales.</p>
-
-  <div class="status" id="checking"><div class="loader"></div><strong>Verificando el pago…</strong><span>Esto suele tardar solo unos segundos.</span></div>
-
-  <div id="approved" class="hidden">
-    <div class="success-box"><strong>✓ Pago aprobado. Tu acceso está listo.</strong><br>Dentro de la carpeta encontrarás el ebook principal y los cuatro recursos complementarios.</div>
-    <a id="driveButton" class="btn" href="#" target="_blank" rel="noopener">Abrir mis materiales →</a>
-    <p class="help">Te recomendamos guardar la carpeta en favoritos. Si tienes alguna duda, escríbenos a <a href="mailto:desdeecorazondecasa@gmail.com">desdeecorazondecasa@gmail.com</a>.</p>
-  </div>
-
-  <div id="pending" class="hidden">
-    <div class="warning-box"><strong>Tu pago todavía figura pendiente.</strong><br>Mercado Pago aún no confirmó la acreditación. No necesitas volver a pagar.</div>
-    <a class="btn secondary" href="/pago-pendiente.html">Ver estado del pago</a>
-  </div>
-
-  <div id="notVerified" class="hidden">
-    <div class="error-box"><strong>No pudimos verificar el pago desde este enlace.</strong><br>Si acabas de pagar, vuelve a Mercado Pago y utiliza el botón para regresar al sitio. Si el problema continúa, escríbenos y te ayudamos.</div>
-    <a class="btn secondary" href="mailto:desdeecorazondecasa@gmail.com">Escribir a soporte</a>
-  </div>
-</section></main>
-<script>
-(async function(){
-  const q=new URLSearchParams(location.search);
-  const paymentId=q.get('payment_id')||q.get('collection_id');
-  const checking=document.getElementById('checking');
-  const approved=document.getElementById('approved');
-  const pending=document.getElementById('pending');
-  const notVerified=document.getElementById('notVerified');
-  if(!paymentId){ checking.classList.add('hidden'); notVerified.classList.remove('hidden'); return; }
-  try{
-    const res=await fetch('/.netlify/functions/verify-payment?payment_id='+encodeURIComponent(paymentId),{cache:'no-store'});
-    const data=await res.json();
-    checking.classList.add('hidden');
-    if(res.ok && data.approved && data.drive_url){
-      document.getElementById('driveButton').href=data.drive_url;
-      approved.classList.remove('hidden');
-    }else if(data.status==='pending' || data.status==='in_process'){
-      pending.classList.remove('hidden');
-    }else{
-      notVerified.classList.remove('hidden');
-    }
-  }catch(e){
-    checking.classList.add('hidden'); notVerified.classList.remove('hidden');
-  }
-})();
-</script>
-</body></html>
+<main class="page">
+  <section class="card">
+    <div class="eyebrow">Compra completada</div>
+    <h1>Gracias por dar este paso.</h1>
+    <p class="lead">Tus materiales ya están listos. Puedes verlos directamente desde la carpeta o descargarlos para tenerlos siempre a mano.</p>
+    <a class="btn" href="https://drive.google.com/drive/folders/1KbRpdf_cDpbQ-ZuDHgvmLr1Ppoyju02M?usp=sharing" target="_blank" rel="noopener">Acceder a mis materiales →</a>
+    <p class="help">Si tienes alguna duda, escríbenos a <a href="mailto:desdeecorazondecasa@gmail.com">desdeecorazondecasa@gmail.com</a>.</p>
+  </section>
+</main>
+</body>
+</html>
