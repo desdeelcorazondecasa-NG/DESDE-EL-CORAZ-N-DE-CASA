@@ -186,6 +186,14 @@ section{padding:78px 0}
 .include .check{color:var(--sage);font-weight:700}
 .price-card .live-small{display:none;justify-content:center;align-items:center;gap:8px;font-size:.82rem;color:var(--sage);margin-bottom:13px}
 .price-card .live-small.show{display:flex}
+.price-urgency{margin:18px 0 20px;padding:16px 17px;border:1px solid rgba(214,154,66,.38);background:#fff8ec;border-radius:14px;text-align:left}
+.price-capacity-head{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;font-size:.88rem;color:var(--ink);font-weight:700}
+.price-capacity-head strong{color:var(--danger)}
+.price-capacity-track{height:9px;background:#eadfce;border-radius:999px;overflow:hidden;margin:10px 0 9px}
+.price-capacity-track>span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--lamp),var(--lamp2));border-radius:inherit;transition:width .35s ease}
+.price-capacity-note{font-size:.79rem;line-height:1.4;color:rgba(33,28,24,.62);margin:0}
+.price-live-urgent{display:none;align-items:center;justify-content:center;gap:8px;margin:12px 0 0;padding-top:12px;border-top:1px solid rgba(33,28,24,.10);font-size:.84rem;color:var(--sage);font-weight:700}
+.price-live-urgent.show{display:flex}
 
 /* FAQ */
 .faq{background:var(--paper)}
@@ -454,10 +462,18 @@ footer{background:#10191b;color:rgba(255,255,255,.5);text-align:center;padding:2
     <div class="price-card">
       <div class="launch">Precio especial de lanzamiento</div>
       <div class="deadline" id="priceCountdown">--:--:--</div>
-      <div class="live-small" id="priceViewer"><span class="live-dot"></span><span><strong id="priceViewerCount">0</strong> personas viendo esta página ahora</span></div>
       <div class="price-old">$14.999 ARS</div>
       <div class="price-now">$9.999 <small>ARS</small></div>
       <div class="price-note">Pago único · acceso inmediato al pack completo</div>
+      <div class="price-urgency" id="priceUrgency">
+        <div class="price-capacity-head">
+          <span><strong id="priceCapacityText">8 de 20 cupos tomados</strong> a este precio de lanzamiento</span>
+          <span aria-hidden="true">🔥</span>
+        </div>
+        <div class="price-capacity-track" aria-hidden="true"><span id="priceCapacityFill"></span></div>
+        <p class="price-capacity-note">Si estabas pensando en entrar, aprovecha ahora antes de que se complete el cupo de lanzamiento.</p>
+        <div class="price-live-urgent" id="priceViewer"><span class="live-dot"></span><span><strong id="priceViewerCount">0</strong> personas viendo esta página ahora</span></div>
+      </div>
       <ul class="include">
         <li><span class="check">✓</span><span>Ebook principal · Mamá, papá, tengo que contarte algo</span></li>
         <li><span class="check">✓</span><span>Los hábitos de una familia donde se puede hablar</span></li>
@@ -491,7 +507,7 @@ footer{background:#10191b;color:rgba(255,255,255,.5);text-align:center;padding:2
 </section>
 
 <footer>
-  <div class="wrap">Desde el Corazón de Casa · <a href="mailto:desdeecorazondecasa@gmail.com">desdeecorazondecasa@gmail.com</a> · Contenido educativo e informativo</div>
+  <div class="wrap">Desde el Corazón de Casa · <a href="mailto:desdeelcorazondecasa@gmail.com">desdeelcorazondecasa@gmail.com</a> · Contenido educativo e informativo</div>
 </footer>
 
 <div class="sticky" id="stickyBar">
@@ -533,8 +549,15 @@ function paintSaleConfig(){
   const pct = Math.round((taken / total) * 100);
   document.getElementById('capacityText').textContent = `${taken} de ${total}`;
   document.getElementById('capacityFill').style.width = `${pct}%`;
+  const priceCapacityText = document.getElementById('priceCapacityText');
+  const priceCapacityFill = document.getElementById('priceCapacityFill');
+  if(priceCapacityText) priceCapacityText.textContent = `${taken} de ${total} cupos tomados`;
+  if(priceCapacityFill) priceCapacityFill.style.width = `${pct}%`;
   if(taken >= total){
     document.getElementById('topCapacity').innerHTML = '<span><strong>Cupos de lanzamiento agotados</strong></span>';
+    if(priceCapacityText) priceCapacityText.textContent = 'Cupos de lanzamiento agotados';
+    const note = document.querySelector('.price-capacity-note');
+    if(note) note.textContent = 'El cupo promocional ya se completó.';
   }
 
   document.querySelector('.price-old').textContent = moneyARS(SALE.regularPrice) + ' ARS';
@@ -608,12 +631,16 @@ const viewerSessionId = (() => {
 
 function paintViewerCount(count){
   const label = count === 1 ? 'persona viendo esta página ahora' : 'personas viendo esta página ahora';
-  document.getElementById('viewerCount').textContent = count;
-  document.getElementById('priceViewerCount').textContent = count;
-  document.querySelector('#topViewer span:last-child').innerHTML = `<strong id="viewerCount">${count}</strong> ${label}`;
-  document.querySelector('#priceViewer span:last-child').innerHTML = `<strong id="priceViewerCount">${count}</strong> ${label}`;
-  document.getElementById('topViewer').classList.add('show');
-  document.getElementById('priceViewer').classList.add('show');
+  const topCount = document.getElementById('viewerCount');
+  const priceCount = document.getElementById('priceViewerCount');
+  if(topCount) topCount.textContent = count;
+  if(priceCount) priceCount.textContent = count;
+  const topText = document.querySelector('#topViewer span:last-child');
+  const priceText = document.querySelector('#priceViewer span:last-child');
+  if(topText) topText.innerHTML = `<strong id="viewerCount">${count}</strong> ${label}`;
+  if(priceText) priceText.innerHTML = `<strong id="priceViewerCount">${count}</strong> ${label}`;
+  document.getElementById('topViewer')?.classList.add('show');
+  document.getElementById('priceViewer')?.classList.add('show');
 }
 
 async function updateViewers(){
@@ -637,8 +664,8 @@ async function updateViewers(){
     }
     paintViewerCount(count);
   }catch(e){
-    document.getElementById('topViewer').classList.remove('show');
-    document.getElementById('priceViewer').classList.remove('show');
+    document.getElementById('topViewer')?.classList.remove('show');
+    document.getElementById('priceViewer')?.classList.remove('show');
   }
 }
 updateViewers();
