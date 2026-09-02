@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Mamá, papá, tengo que contarte algo — Desde el Corazón de Casa</title>
+<meta name="description" content="Manual práctico para construir la confianza que hace que tu hijo te busque cuando algo le pasa." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Karla:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#211C18;
+  --night:#1E2A2E;
+  --night2:#152022;
+  --paper:#F8F3E9;
+  --paper2:#EFE5D2;
+  --lamp:#D69A42;
+  --lamp2:#F0C47C;
+  --sage:#4D6254;
+  --sage2:#8CA18B;
+  --danger:#B5533C;
+  --rose:#B95B70;
+  --white:#fff;
+  --line:rgba(33,28,24,.14);
+  --shadow:0 18px 55px rgba(20,28,29,.12);
+  --max:1080px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:'Karla',Arial,sans-serif;
+  line-height:1.58;
+  -webkit-font-smoothing:antialiased;
+  padding-top:46px;
+}
+h1,h2,h3,h4{font-family:'Fraunces',Georgia,serif;line-height:1.08;margin:0;letter-spacing:-.02em}
+p{margin:0 0 1em}
+a{color:inherit}
+button{font:inherit}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+.narrow{max-width:760px;margin:0 auto}
+section{padding:78px 0}
+.eyebrow{font-size:.78rem;letter-spacing:.11em;text-transform:uppercase;font-weight:700;color:var(--lamp);margin-bottom:14px}
+.muted{color:rgba(33,28,24,.67)}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  border:0;border-radius:9px;padding:16px 22px;font-weight:700;text-decoration:none;
+  cursor:pointer;transition:.16s ease;min-height:54px;
+}
+.btn-primary{background:var(--lamp);color:#1b140b;box-shadow:0 9px 24px rgba(214,154,66,.25)}
+.btn-primary:hover{background:var(--lamp2);transform:translateY(-1px)}
+.btn-secondary{background:transparent;border:1px solid rgba(255,255,255,.25);color:#fff}
+.btn-block{width:100%}
+.micro{font-size:.82rem;color:rgba(255,255,255,.65);margin-top:12px}
+
+/* urgency */
+.urgency-bar{
+  position:fixed;z-index:100;left:0;right:0;top:0;height:46px;
+  background:#10191b;color:#f7efe2;display:flex;align-items:center;
+  border-bottom:1px solid rgba(255,255,255,.08)
+}
+.urgency-inner{max-width:var(--max);width:100%;margin:auto;padding:0 24px;display:flex;align-items:center;justify-content:center;gap:18px;font-size:.84rem}
+.urgency-inner strong{color:var(--lamp2);font-variant-numeric:tabular-nums}
+.urgency-segment{display:flex;align-items:center;gap:9px;white-space:nowrap}
+.urgency-segment + .urgency-segment{padding-left:18px;border-left:1px solid rgba(255,255,255,.14)}
+.live-dot{width:7px;height:7px;background:#78c58b;border-radius:50%;box-shadow:0 0 0 5px rgba(120,197,139,.13);flex:0 0 auto}
+.viewer-badge{display:none}
+.viewer-badge.show{display:flex}
+.capacity-badge{display:flex}
+.capacity-mini{width:58px;height:5px;border-radius:999px;background:rgba(255,255,255,.14);overflow:hidden}
+.capacity-mini > span{display:block;height:100%;width:0;background:var(--lamp2);border-radius:inherit;transition:width .35s ease}
+
+/* hero */
+.hero{padding:82px 0 68px;background:
+ radial-gradient(circle at 80% 15%, rgba(214,154,66,.16), transparent 31%),
+ linear-gradient(180deg,var(--night),var(--night2));color:var(--paper);overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:center}
+.hero h1{font-size:clamp(2.7rem,6vw,5rem);color:#fff;max-width:780px}
+.hero h1 em{font-style:normal;color:var(--lamp2)}
+.hero .lead{font-size:1.18rem;color:rgba(248,243,233,.82);max-width:680px;margin:24px 0 28px}
+.hero .subproof{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.pill{font-size:.82rem;padding:8px 11px;border-radius:999px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.045);color:rgba(255,255,255,.76)}
+.hero-card{position:relative;background:#f5ebdc;color:var(--ink);border-radius:20px;padding:28px;box-shadow:0 30px 90px rgba(0,0,0,.25);transform:rotate(1.3deg)}
+.hero-card:before{content:'';position:absolute;inset:9px;border:1px solid rgba(33,28,24,.08);border-radius:14px;pointer-events:none}
+.hero-card .small{font-size:.74rem;text-transform:uppercase;letter-spacing:.12em;color:var(--rose);font-weight:700}
+.hero-card h3{font-size:1.75rem;margin:11px 0 20px}
+.chat{display:flex;flex-direction:column;gap:10px}
+.bubble{max-width:88%;padding:12px 14px;border-radius:13px;font-size:.93rem;line-height:1.4}
+.bubble.child{background:#fff;align-self:flex-start;border-bottom-left-radius:4px}
+.bubble.parent{background:#dfe8df;align-self:flex-end;border-bottom-right-radius:4px}
+.hero-card .note{margin-top:18px;padding-top:16px;border-top:1px solid var(--line);font-size:.85rem;color:rgba(33,28,24,.64)}
+
+/* pain */
+.pain{background:var(--paper)}
+.pain h2,.solution h2,.stack h2,.change h2,.science h2,.faq h2{font-size:clamp(2rem,4vw,3.3rem);max-width:820px}
+.pain-intro{font-size:1.15rem;max-width:780px;margin-top:20px}
+.pain-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:32px}
+.pain-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:23px;box-shadow:0 8px 26px rgba(30,42,46,.04)}
+.pain-card .icon{font-size:1.3rem;margin-bottom:10px}
+.pain-card h3{font-size:1.08rem;margin-bottom:7px}
+.pain-card p{font-size:.91rem;color:rgba(33,28,24,.72);margin:0}
+.pain-callout{margin-top:30px;background:var(--night);color:#fff;border-radius:16px;padding:28px 30px;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center}
+.pain-callout strong{font-family:'Fraunces',serif;font-size:1.42rem;font-weight:600;color:#fff}
+.pain-callout p{margin:6px 0 0;color:rgba(255,255,255,.7)}
+
+/* quiz */
+.quiz-section{background:var(--paper2)}
+.quiz-shell{background:var(--night);color:#fff;border-radius:22px;padding:34px;box-shadow:var(--shadow);overflow:hidden;position:relative}
+.quiz-shell:after{content:'';position:absolute;width:260px;height:260px;border-radius:50%;background:rgba(214,154,66,.1);right:-100px;top:-110px}
+.quiz-head{position:relative;z-index:1;max-width:750px}
+.quiz-head h2{font-size:clamp(1.8rem,4vw,2.8rem)}
+.quiz-head p{color:rgba(255,255,255,.72);margin-top:14px}
+.quiz-body{margin-top:28px;position:relative;z-index:1}
+.q-meta{display:flex;justify-content:space-between;font-size:.78rem;color:rgba(255,255,255,.55);margin-bottom:8px}
+.progress{height:6px;background:rgba(255,255,255,.12);border-radius:999px;overflow:hidden;margin-bottom:22px}
+.progress>span{display:block;height:100%;background:var(--lamp);width:20%;transition:.25s ease}
+.question{display:none}.question.active{display:block}
+.question h3{font-size:1.35rem;margin-bottom:16px}
+.options{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.option{background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.16);color:#fff;border-radius:10px;text-align:left;padding:14px;cursor:pointer}
+.option:hover{border-color:var(--lamp);background:rgba(214,154,66,.09)}
+.quiz-result{display:none;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:22px;margin-top:20px}
+.quiz-result.show{display:block}
+.quiz-result strong{color:var(--lamp2)}
+
+/* explanation & solution */
+.cost{background:#fff}
+.cost-grid{display:grid;grid-template-columns:.95fr 1.05fr;gap:46px;align-items:center}
+.cost-box{background:var(--paper2);border-radius:18px;padding:30px;border-left:5px solid var(--lamp)}
+.cost-box .quote{font-family:'Fraunces',serif;font-size:1.7rem;line-height:1.2;margin-bottom:16px}
+.cost-list{display:grid;gap:10px;margin-top:18px}
+.cost-row{display:flex;gap:11px;align-items:flex-start;font-size:.95rem}
+.cost-row span{color:var(--danger);font-weight:700}
+.solution{background:var(--paper2)}
+.solution .intro{font-size:1.12rem;max-width:770px;margin-top:18px}
+.steps{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:34px}
+.step{background:#fff;border:1px solid var(--line);border-radius:13px;padding:20px 17px;min-height:205px}
+.step .num{font-family:'Fraunces',serif;font-size:2rem;color:var(--lamp);margin-bottom:10px}
+.step h3{font-size:1.08rem;margin-bottom:8px}
+.step p{font-size:.88rem;color:rgba(33,28,24,.7);margin:0}
+
+/* stack */
+.stack{background:var(--night);color:var(--paper)}
+.stack h2{color:#fff}
+.stack .intro{color:rgba(255,255,255,.7);max-width:760px;margin-top:18px}
+.resource-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:34px}
+.resource{border:1px solid rgba(255,255,255,.13);background:rgba(255,255,255,.045);border-radius:15px;padding:24px;position:relative}
+.resource.main{grid-column:1/-1;border-color:rgba(214,154,66,.62);background:linear-gradient(135deg,rgba(214,154,66,.12),rgba(255,255,255,.03))}
+.resource .tag{font-size:.72rem;letter-spacing:.09em;text-transform:uppercase;color:var(--lamp2);font-weight:700}
+.resource h3{font-size:1.3rem;color:#fff;margin:9px 0 8px}
+.resource p{font-size:.92rem;color:rgba(255,255,255,.7);margin:0}
+.resource .pages{display:inline-block;margin-top:14px;color:rgba(255,255,255,.45);font-size:.78rem}
+
+/* before/after */
+.change{background:var(--paper)}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:34px}
+.compare-col{border-radius:16px;padding:27px;border:1px solid var(--line)}
+.compare-col.before{background:#f4e7e3}.compare-col.after{background:#e5eee5}
+.compare-col h3{font-size:1.3rem;margin-bottom:15px}
+.compare-list{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.compare-list li{display:flex;gap:10px;align-items:flex-start;font-size:.94rem}
+.compare-list .x{color:var(--danger);font-weight:700}.compare-list .ok{color:var(--sage);font-weight:700}
+
+/* science */
+.science{background:#fff}
+.science-chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.chip{background:var(--paper2);color:var(--sage);font-weight:700;font-size:.85rem;border-radius:999px;padding:9px 13px}
+.disclaimer{font-size:.85rem;color:rgba(33,28,24,.58);max-width:760px;margin-top:22px}
+
+/* price */
+.price{background:var(--paper2)}
+.price-wrap{max-width:680px;margin:0 auto}
+.price-card{background:#fff;border:1px solid var(--line);border-radius:21px;padding:34px;box-shadow:var(--shadow);text-align:center}
+.price-card .launch{font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;font-weight:700;color:var(--danger)}
+.price-card .deadline{font-family:'Fraunces',serif;font-size:2rem;margin:8px 0 18px;font-variant-numeric:tabular-nums}
+.price-old{color:rgba(33,28,24,.42);text-decoration:line-through;font-size:1.05rem}
+.price-now{font-family:'Fraunces',serif;font-size:3.3rem;line-height:1;margin:7px 0 3px}
+.price-now small{font-family:'Karla',sans-serif;font-size:.9rem;color:rgba(33,28,24,.55)}
+.price-note{font-size:.88rem;color:rgba(33,28,24,.65);margin:8px 0 20px}
+.include{list-style:none;margin:22px 0;padding:0;text-align:left;border-top:1px solid var(--line)}
+.include li{padding:10px 0;border-bottom:1px solid var(--line);display:flex;gap:10px;font-size:.93rem}
+.include .check{color:var(--sage);font-weight:700}
+.price-card .live-small{display:none;justify-content:center;align-items:center;gap:8px;font-size:.82rem;color:var(--sage);margin-bottom:13px}
+.price-card .live-small.show{display:flex}
+
+/* FAQ */
+.faq{background:var(--paper)}
+details{border-bottom:1px solid var(--line);padding:18px 0}
+summary{cursor:pointer;list-style:none;font-family:'Fraunces',serif;font-size:1.05rem;display:flex;justify-content:space-between;gap:14px}
+summary::-webkit-details-marker{display:none}
+summary:after{content:'+';color:var(--lamp);font-family:'Karla',sans-serif;font-size:1.5rem}
+details[open] summary:after{content:'−'}
+details p{margin:12px 0 0;color:rgba(33,28,24,.72);font-size:.93rem}
+
+/* final */
+.final{background:linear-gradient(180deg,var(--night),var(--night2));color:#fff;text-align:center}
+.final h2{font-size:clamp(2.2rem,5vw,4rem);max-width:820px;margin:0 auto}
+.final p{max-width:650px;margin:20px auto 28px;color:rgba(255,255,255,.72);font-size:1.05rem}
+footer{background:#10191b;color:rgba(255,255,255,.5);text-align:center;padding:24px 0 100px;font-size:.8rem}
+
+/* sticky */
+.sticky{position:fixed;left:0;right:0;bottom:0;z-index:80;background:rgba(248,243,233,.96);backdrop-filter:blur(8px);border-top:1px solid var(--line);padding:10px 16px;display:none;align-items:center;justify-content:center;gap:16px;box-shadow:0 -8px 30px rgba(0,0,0,.08)}
+.sticky.show{display:flex}.sticky-price{font-family:'Fraunces',serif;font-size:1.2rem;white-space:nowrap}.sticky .btn{min-height:46px;padding:11px 18px}
+.preview-ribbon{display:none;position:fixed;right:12px;top:58px;z-index:120;background:#fff3c4;color:#6d5413;border:1px solid #ead47b;border-radius:7px;padding:6px 10px;font-size:.72rem;font-weight:700}
+.preview-ribbon.show{display:block}
+
+@media(max-width:900px){
+  .hero-grid,.cost-grid{grid-template-columns:1fr}.hero-card{max-width:620px;transform:none}.pain-grid{grid-template-columns:1fr 1fr}.steps{grid-template-columns:1fr 1fr}.step:last-child{grid-column:1/-1}.resource-grid{grid-template-columns:1fr}.resource.main{grid-column:auto}
+}
+@media(max-width:640px){
+  body{padding-top:82px}.urgency-bar{height:82px}.urgency-inner{padding:7px 10px;font-size:.70rem;gap:5px 8px;flex-wrap:wrap;justify-content:center;align-content:center}.urgency-segment:first-child{flex-basis:100%;justify-content:center}.urgency-segment + .urgency-segment{padding-left:8px}.capacity-mini{width:40px}.viewer-badge.show{display:flex}.hero{padding:58px 0 52px}.wrap{padding:0 18px}section{padding:58px 0}.hero h1{font-size:2.65rem}.hero .lead{font-size:1.04rem}.hero-card{padding:22px}.pain-grid,.compare,.options,.steps{grid-template-columns:1fr}.pain-callout{grid-template-columns:1fr}.quiz-shell{padding:24px 19px}.resource{padding:21px}.price-card{padding:27px 21px}.price-now{font-size:2.75rem}.sticky{justify-content:space-between}.sticky .btn{width:auto}
+}
+</style>
+</head>
+<body>
+
+<div class="urgency-bar">
+  <div class="urgency-inner">
+    <span class="urgency-segment">Precio de lanzamiento termina en <strong id="topCountdown">--:--:--</strong></span>
+    <span class="urgency-segment capacity-badge" id="topCapacity">
+      <span><strong id="capacityText">8 de 20</strong> cupos tomados</span>
+      <span class="capacity-mini" aria-hidden="true"><span id="capacityFill"></span></span>
+    </span>
+    <span class="urgency-segment viewer-badge" id="topViewer"><span class="live-dot"></span><span><strong id="viewerCount">0</strong> personas viendo esta página ahora</span></span>
+  </div>
+</div>
+<div class="preview-ribbon" id="previewRibbon">VISTA PREVIA · personas en vivo simuladas</div>
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Guía práctica para padres y madres</div>
+      <h1>El miedo no es que tu hijo diga “nada”.<br><em>Es que un día le pase algo importante… y decida vivirlo solo.</em></h1>
+      <p class="lead">Aprende a reconstruir la confianza para que, cuando algo le duela, lo asuste o lo supere, tu hijo sepa que puede acudir a ti sin miedo a ser juzgado, castigado o incomprendido.</p>
+      <a class="btn btn-primary" href="#precio">Quiero volver a ser su refugio →</a>
+      <div class="micro">Acceso inmediato · 5 recursos en PDF · pago único</div>
+      <div class="subproof">
+        <span class="pill">Sin espiar el teléfono</span>
+        <span class="pill">Sin forzar confesiones</span>
+        <span class="pill">Con herramientas concretas</span>
+      </div>
+    </div>
+
+    <div class="hero-card" aria-label="Ejemplo de conversación">
+      <div class="small">La conversación que quieres hacer posible</div>
+      <h3>Que algún día pueda decirte:</h3>
+      <div class="chat">
+        <div class="bubble child">Mamá… papá… tengo que contarles algo.</div>
+        <div class="bubble parent">Gracias por contármelo. Estoy aquí. Puedes seguir.</div>
+        <div class="bubble child">Tenía miedo de que se enojaran.</div>
+        <div class="bubble parent">Lo importante ahora es entenderte y ayudarte. Vamos paso a paso.</div>
+      </div>
+      <div class="note"><strong>No se trata de que te cuente todo.</strong> Se trata de que el miedo a tu reacción no sea la razón por la que atraviese solo algo importante.</div>
+    </div>
+  </div>
+</header>
+
+<section class="pain">
+  <div class="wrap">
+    <div class="eyebrow">Ese silencio pesa más de lo que parece</div>
+    <h2>Porque detrás de un “estoy bien” puede haber cosas que todavía no sabe cómo decir.</h2>
+    <p class="pain-intro muted">Y lo más difícil como padre o madre no es no saber cada detalle de su vida. Es preguntarte si, cuando realmente necesite ayuda, tú vas a ser la primera persona a la que recurra… o la última.</p>
+
+    <div class="pain-grid">
+      <div class="pain-card"><div class="icon">◌</div><h3>Preguntas y más preguntas</h3><p>Preguntas “¿qué te pasa?” y recibes “nada”, “no sé” o una puerta que se cierra.</p></div>
+      <div class="pain-card"><div class="icon">◌</div><h3>Te enteras por otros</h3><p>Descubres por amigos, familiares o el colegio cosas que hubieras querido que te contara primero.</p></div>
+      <div class="pain-card"><div class="icon">◌</div><h3>Temes reaccionar mal</h3><p>Sabes que, si te contara algo grave hoy, quizá el miedo te haría sermonear, castigar o querer resolver todo de golpe.</p></div>
+      <div class="pain-card"><div class="icon">◌</div><h3>El teléfono se vuelve una muralla</h3><p>Sientes que su mundo está ahí dentro y que tú solo ves una pequeña parte desde afuera.</p></div>
+      <div class="pain-card"><div class="icon">◌</div><h3>La distancia crece en silencio</h3><p>No hubo una gran pelea. Simplemente dejó de contarte pequeñas cosas… y un día notaste que ya casi no sabías nada.</p></div>
+      <div class="pain-card"><div class="icon">◌</div><h3>El miedo de llegar tarde</h3><p>Bullying, grooming, ansiedad, presión social, una relación dañina o algo que lo supera y tú sin saberlo.</p></div>
+    </div>
+
+    <div class="pain-callout">
+      <div><strong>No necesitas hacerle más preguntas. Necesitas bajar el costo de contarte.</strong><p>Cuando hablar deja de sentirse como el comienzo de un problema, aumenta la posibilidad de que vuelva a abrir la puerta.</p></div>
+      <a href="#solucion" class="btn btn-primary">Muéstrame cómo</a>
+    </div>
+  </div>
+</section>
+
+<section class="quiz-section" id="diagnostico">
+  <div class="wrap">
+    <div class="quiz-shell">
+      <div class="quiz-head">
+        <div class="eyebrow">Diagnóstico rápido · 60 segundos</div>
+        <h2>¿Qué tan caro se siente hablar contigo hoy?</h2>
+        <p>No es un diagnóstico clínico. Es una forma simple de mirar la dinámica actual y detectar dónde conviene empezar a cambiar.</p>
+      </div>
+      <div class="quiz-body" id="quizBody">
+        <div class="q-meta"><span id="qCount">Pregunta 1 de 5</span><span id="qPct">20%</span></div>
+        <div class="progress"><span id="qProgress"></span></div>
+
+        <div class="question active" data-q="0">
+          <h3>Cuando preguntas cómo le fue, ¿qué suele pasar?</h3>
+          <div class="options">
+            <button class="option" data-value="un “bien” rápido y poco más">Me responde “bien” y corta la conversación.</button>
+            <button class="option" data-value="respuestas cortas mientras sigue con el teléfono">Responde con monosílabos y sigue mirando el teléfono.</button>
+            <button class="option" data-value="una reacción defensiva">Se pone a la defensiva, como si estuviera siendo interrogado.</button>
+            <button class="option" data-value="silencio o rechazo directo">Directamente no quiere hablar.</button>
+          </div>
+        </div>
+
+        <div class="question" data-q="1">
+          <h3>¿Cuándo fue la última vez que te contó algo importante sin que tuvieras que insistir?</h3>
+          <div class="options">
+            <button class="option">Hace poco; todavía existe bastante apertura.</button>
+            <button class="option">Hace meses.</button>
+            <button class="option">Antes me contaba mucho más que ahora.</button>
+            <button class="option">No recuerdo la última vez.</button>
+          </div>
+        </div>
+
+        <div class="question" data-q="2">
+          <h3>Cuando te cuenta algo que no te gusta, ¿qué aparece primero en ti?</h3>
+          <div class="options">
+            <button class="option">Quiero solucionar el problema cuanto antes.</button>
+            <button class="option">Me entra miedo y hago muchas preguntas.</button>
+            <button class="option">Me enojo o siento necesidad de corregir.</button>
+            <button class="option">Intento escuchar, pero no siempre sé cómo responder.</button>
+          </div>
+        </div>
+
+        <div class="question" data-q="3">
+          <h3>¿Qué es lo que más temes si esta distancia sigue creciendo?</h3>
+          <div class="options">
+            <button class="option" data-value="enterarte demasiado tarde de algo importante">Enterarme demasiado tarde de algo importante.</button>
+            <button class="option" data-value="que la relación siga alejándose">Que la relación se siga alejando.</button>
+            <button class="option" data-value="que busque apoyo en cualquier lugar menos en casa">Que busque apoyo en cualquier lugar menos en casa.</button>
+            <button class="option" data-value="que aprenda que sus padres no son un lugar seguro para hablar">Que aprenda que con nosotros es mejor no hablar de ciertas cosas.</button>
+          </div>
+        </div>
+
+        <div class="question" data-q="4">
+          <h3>Si hoy dijera “tengo que contarte algo”, ¿te sentirías preparado para escuchar primero y actuar después?</h3>
+          <div class="options">
+            <button class="option">Sí, pero quiero más herramientas.</button>
+            <button class="option">No del todo; probablemente reaccionaría desde el miedo.</button>
+            <button class="option">Depende de lo que me diga.</button>
+            <button class="option">Sinceramente, no sé cómo reaccionaría.</button>
+          </div>
+        </div>
+      </div>
+      <div class="quiz-result" id="quizResult">
+        <strong id="quizHeadline">Hay una puerta que todavía se puede volver a abrir.</strong>
+        <p id="quizCopy" style="margin:9px 0 0;color:rgba(255,255,255,.76)"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cost">
+  <div class="wrap cost-grid">
+    <div>
+      <div class="eyebrow">La raíz del problema</div>
+      <h2 style="font-size:clamp(2rem,4vw,3.2rem)">Tu hijo puede querer contarte… y al mismo tiempo tener miedo de lo que pasará después.</h2>
+      <p class="muted" style="font-size:1.05rem;margin-top:18px">No hace falta una gran discusión para que aparezca ese miedo. A veces se construye con pequeñas experiencias repetidas; otras veces surge de la vergüenza, la incertidumbre o de imaginar una reacción que nunca llegó a ocurrir.</p>
+    </div>
+    <div class="cost-box">
+      <div class="quote">“¿Qué va a pasar si digo esto?”</div>
+      <div class="cost-list">
+        <div class="cost-row"><span>×</span><div>¿Se van a enojar?</div></div>
+        <div class="cost-row"><span>×</span><div>¿Me van a castigar o quitar el teléfono?</div></div>
+        <div class="cost-row"><span>×</span><div>¿Van a llamar inmediatamente al colegio o a otra familia?</div></div>
+        <div class="cost-row"><span>×</span><div>¿Me van a mirar diferente?</div></div>
+        <div class="cost-row"><span>×</span><div>¿Van a convertir esto en algo todavía más grande?</div></div>
+      </div>
+      <p style="margin:20px 0 0;font-weight:700">La solución no es culparte. Es cambiar lo que tu hijo puede esperar de ti a partir de ahora.</p>
+    </div>
+  </div>
+</section>
+
+<section class="solution" id="solucion">
+  <div class="wrap">
+    <div class="eyebrow">La solución</div>
+    <h2>No se trata de una conversación perfecta. Se trata de reconstruir un camino de vuelta.</h2>
+    <p class="intro muted">El pack te enseña a trabajar sobre lo que sí puedes controlar: tu forma de escuchar, reaccionar, poner límites, reparar errores y construir un clima cotidiano donde hablar resulte cada vez más seguro.</p>
+    <div class="steps">
+      <div class="step"><div class="num">1</div><h3>Seguridad</h3><p>Comprender qué puede estar haciendo que hablar se sienta riesgoso.</p></div>
+      <div class="step"><div class="num">2</div><h3>Apertura</h3><p>Cambiar primero la reacción adulta para reducir presión, juicio y urgencia.</p></div>
+      <div class="step"><div class="num">3</div><h3>Confianza</h3><p>Crear experiencias pequeñas y repetidas donde contar no tenga un costo emocional alto.</p></div>
+      <div class="step"><div class="num">4</div><h3>Revelación</h3><p>Dejar de forzar información y aumentar la posibilidad de que el hijo elija hablar.</p></div>
+      <div class="step"><div class="num">5</div><h3>Acompañamiento</h3><p>Saber qué hacer cuando finalmente aparece una conversación difícil.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="stack" id="oferta">
+  <div class="wrap">
+    <div class="eyebrow">Lo que recibes hoy</div>
+    <h2>Un sistema completo para entender, reconstruir, practicar y saber responder.</h2>
+    <p class="intro">No son PDFs sueltos. Cada recurso resuelve una parte distinta del mismo problema: que tu hijo vuelva a sentir que casa puede ser un lugar seguro para hablar.</p>
+    <div class="resource-grid">
+      <article class="resource main"><div class="tag">Producto principal · ~95 páginas</div><h3>Mamá, papá, tengo que contarte algo</h3><p>Para dejar de sentir que cada intento de acercarte lo aleja un poco más. Este manual te ayuda a reconstruir un vínculo en el que tu hijo pueda volver a sentir que acercarse a ti es más seguro que guardarse lo que le pasa.</p><span class="pages">El punto de partida para volver a abrir la puerta</span></article>
+      <article class="resource"><div class="tag">Recurso complementario · ~48 páginas</div><h3>Los hábitos de una familia donde se puede hablar</h3><p>Para que la confianza no dependa de conseguir “la charla perfecta”. Te ayuda a transformar lo cotidiano en pequeñas pruebas repetidas de que en casa puede equivocarse, bajar la guardia y acercarse sin sentir presión.</p></article>
+      <article class="resource"><div class="tag">Bonus preventivo · ~43 páginas</div><h3>Antes de que deje de contarte</h3><p>Para no esperar a que aparezca el silencio. Te ayuda a construir desde temprano una relación en la que pedir ayuda, contar un error o decir “algo me pasa” pueda sentirse natural, incluso cuando lo que tiene que decir es difícil.</p></article>
+      <article class="resource"><div class="tag">Workbook · ~65 páginas</div><h3>30 días para volver a acercarte</h3><p>Para cuando sabes que quieres recuperar la cercanía, pero no sabes por dónde empezar sin forzar. Te guía paso a paso para que tu hijo empiece a notar, a través de tus acciones, que algo realmente está cambiando.</p></article>
+      <article class="resource"><div class="tag">Recurso rápido · ~19 páginas</div><h3>Protocolo REFUGIO</h3><p>Qué hacer durante los primeros minutos después de una revelación difícil para que el miedo, el impacto o una reacción impulsiva no cierre otra vez la puerta. Un mapa para proteger a tu hijo y hacer que haber acudido a ti se sienta como una buena decisión.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="change">
+  <div class="wrap">
+    <div class="eyebrow">La transformación</div>
+    <h2>No puedes controlar cuándo hablará. Sí puedes cambiar la experiencia de hablar contigo.</h2>
+    <div class="compare">
+      <div class="compare-col before">
+        <h3>Antes</h3>
+        <ul class="compare-list">
+          <li><span class="x">×</span><span>Preguntar una y otra vez “¿qué te pasa?” y terminar frustrado.</span></li>
+          <li><span class="x">×</span><span>Confundir preocupación con necesidad de controlar.</span></li>
+          <li><span class="x">×</span><span>Responder desde el miedo y después arrepentirte.</span></li>
+          <li><span class="x">×</span><span>No saber si insistir, callar, castigar o dejar pasar.</span></li>
+          <li><span class="x">×</span><span>Tener miedo de no saber qué hacer si un día cuenta algo grave.</span></li>
+        </ul>
+      </div>
+      <div class="compare-col after">
+        <h3>Después de aplicar el sistema</h3>
+        <ul class="compare-list">
+          <li><span class="ok">✓</span><span>Reconocer cuándo una pregunta ayuda y cuándo se convierte en interrogatorio.</span></li>
+          <li><span class="ok">✓</span><span>Regular tu primera reacción antes de aconsejar o actuar.</span></li>
+          <li><span class="ok">✓</span><span>Validar sin aprobar conductas que necesitan límites.</span></li>
+          <li><span class="ok">✓</span><span>Crear hábitos que muestran seguridad sin pedir confesiones.</span></li>
+          <li><span class="ok">✓</span><span>Tener un protocolo claro para una revelación difícil.</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="science">
+  <div class="wrap">
+    <div class="eyebrow">Contenido serio, explicado de forma humana</div>
+    <h2>No está construido desde opiniones sueltas.</h2>
+    <p class="muted" style="max-width:760px;margin-top:18px">Los materiales traducen a herramientas cotidianas marcos de psicología del desarrollo, apego, regulación emocional y comunicación familiar. La ciencia está debajo; arriba, el padre o la madre encuentra ejemplos, guiones, ejercicios y decisiones concretas.</p>
+    <div class="science-chips">
+      <span class="chip">Teoría del apego</span>
+      <span class="chip">Emotion Coaching</span>
+      <span class="chip">Escucha activa</span>
+      <span class="chip">Mensajes-yo</span>
+      <span class="chip">Comunicación no violenta</span>
+      <span class="chip">Psicología del desarrollo</span>
+      <span class="chip">Investigación parento-filial</span>
+    </div>
+    <p class="disclaimer">Contenido educativo e informativo. No reemplaza terapia, evaluación clínica ni atención profesional. Ante abuso, grooming, autolesión, ideación suicida, violencia u otras situaciones de riesgo, la prioridad es la seguridad y la búsqueda de ayuda especializada.</p>
+  </div>
+</section>
+
+<section class="price" id="precio">
+  <div class="wrap price-wrap">
+    <div class="price-card">
+      <div class="launch">Precio especial de lanzamiento</div>
+      <div class="deadline" id="priceCountdown">--:--:--</div>
+      <div class="live-small" id="priceViewer"><span class="live-dot"></span><span><strong id="priceViewerCount">0</strong> personas viendo esta página ahora</span></div>
+      <div class="price-old">$14.999 ARS</div>
+      <div class="price-now">$9.999 <small>ARS</small></div>
+      <div class="price-note">Pago único · acceso inmediato al pack completo</div>
+      <ul class="include">
+        <li><span class="check">✓</span><span>Ebook principal · Mamá, papá, tengo que contarte algo</span></li>
+        <li><span class="check">✓</span><span>Los hábitos de una familia donde se puede hablar</span></li>
+        <li><span class="check">✓</span><span>Bonus · Antes de que deje de contarte</span></li>
+        <li><span class="check">✓</span><span>Workbook · 30 días para volver a acercarte</span></li>
+        <li><span class="check">✓</span><span>Recurso rápido · Protocolo REFUGIO</span></li>
+      </ul>
+      <button class="btn btn-primary btn-block" id="buyButton">Quiero acceder al pack completo →</button>
+    </div>
+  </div>
+</section>
+
+<section class="faq">
+  <div class="wrap narrow">
+    <div class="eyebrow">Preguntas frecuentes</div>
+    <h2>Antes de comprar</h2>
+    <details><summary>¿Esto sirve si mi hijo ya casi no me habla?</summary><p>Sí. El manual principal está construido justamente alrededor de ese dolor: comprender qué puede estar cerrando la comunicación, cambiar primero la reacción adulta y empezar a reconstruir seguridad sin forzar conversaciones.</p></details>
+    <details><summary>¿Y si mi hijo no quiere hacer ejercicios conmigo?</summary><p>No necesita hacerlos. La mayor parte del trabajo comienza en el adulto: cómo pregunta, escucha, reacciona, repara y organiza pequeños momentos de conexión. No necesitas convencer a tu hijo de “hacer el programa”.</p></details>
+    <details><summary>¿Esto reemplaza la terapia?</summary><p>No. Es educación y entrenamiento en comunicación familiar. Si existe una situación que requiere evaluación o tratamiento profesional, el material no sustituye esa atención.</p></details>
+    <details><summary>Mi hijo tiene 9 años. ¿Me sirve?</summary><p>Sí. El bonus “Antes de que deje de contarte” trabaja específicamente la construcción preventiva de confianza desde los 8 años, con orientaciones por etapas.</p></details>
+    <details><summary>¿Cuándo recibo los materiales?</summary><p>Después de confirmar el pago, el acceso a los cinco PDFs es inmediato.</p></details>
+  </div>
+</section>
+
+<section class="final">
+  <div class="wrap">
+    <h2>No necesitas que tu hijo te cuente todo. Necesitas que sepa que puede contarte lo importante.</h2>
+    <p>Empieza por lo que sí está en tus manos: la forma en que escuchas, reaccionas, reparas y construyes seguridad cada día.</p>
+    <a href="#precio" class="btn btn-primary">Quiero empezar hoy →</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">Desde el Corazón de Casa · <a href="mailto:desdeecorazondecasa@gmail.com">desdeecorazondecasa@gmail.com</a> · Contenido educativo e informativo</div>
+</footer>
+
+<div class="sticky" id="stickyBar">
+  <div class="sticky-price">$9.999 ARS</div>
+  <a href="#precio" class="btn btn-primary">Ver oferta</a>
+</div>
+
+<script>
+/* =========================================================
+   CONFIGURACIÓN DEL FRONTEND
+   Los datos públicos de la oferta se leen desde Netlify para
+   que precio, fecha y cupos queden sincronizados con el checkout.
+========================================================= */
+const CONFIG = {
+  publicConfigEndpoint: '/.netlify/functions/public-config',
+  liveViewerEndpoint: '/.netlify/functions/live-viewers',
+  checkoutEndpoint: '/.netlify/functions/create-preference'
+};
+
+const SALE = {
+  // Fallback visual. Antes de publicar configura OFFER_ENDS_AT en Netlify.
+  offerEndsAt: '2026-09-02T23:59:59-03:00',
+  regularPrice: 14999,
+  launchPrice: 9999,
+  cuposTotales: 20,
+  cuposTomados: 8
+};
+
+const previewMode = new URLSearchParams(location.search).get('preview') === '1';
+if (previewMode) document.getElementById('previewRibbon').classList.add('show');
+
+function moneyARS(value){
+  return '$' + Number(value).toLocaleString('es-AR');
+}
+
+function paintSaleConfig(){
+  const total = Math.max(1, Number(SALE.cuposTotales) || 20);
+  const taken = Math.max(0, Math.min(total, Number(SALE.cuposTomados) || 0));
+  const pct = Math.round((taken / total) * 100);
+  document.getElementById('capacityText').textContent = `${taken} de ${total}`;
+  document.getElementById('capacityFill').style.width = `${pct}%`;
+  if(taken >= total){
+    document.getElementById('topCapacity').innerHTML = '<span><strong>Cupos de lanzamiento agotados</strong></span>';
+  }
+
+  document.querySelector('.price-old').textContent = moneyARS(SALE.regularPrice) + ' ARS';
+  document.querySelector('.price-now').innerHTML = `${moneyARS(SALE.launchPrice)} <small>ARS</small>`;
+  document.querySelector('.sticky-price').textContent = `${moneyARS(SALE.launchPrice)} ARS`;
+}
+
+async function loadPublicConfig(){
+  try{
+    const res = await fetch(CONFIG.publicConfigEndpoint,{cache:'no-store'});
+    if(!res.ok) throw new Error('config unavailable');
+    const data = await res.json();
+    if(data.offerEndsAt) SALE.offerEndsAt = data.offerEndsAt;
+    if(Number.isFinite(Number(data.regularPrice))) SALE.regularPrice = Number(data.regularPrice);
+    if(Number.isFinite(Number(data.launchPrice))) SALE.launchPrice = Number(data.launchPrice);
+    if(Number.isFinite(Number(data.cuposTotales))) SALE.cuposTotales = Number(data.cuposTotales);
+    if(Number.isFinite(Number(data.cuposTomados))) SALE.cuposTomados = Number(data.cuposTomados);
+  }catch(e){
+    console.warn('Usando configuración visual de respaldo.', e);
+  }
+  paintSaleConfig();
+  tickCountdown();
+}
+
+/* COUNTDOWN: fecha fija, no se reinicia por visitante. */
+function formatRemaining(ms){
+  if(ms <= 0) return '00:00:00';
+  const total = Math.floor(ms/1000);
+  const h = Math.floor(total/3600);
+  const m = Math.floor((total%3600)/60);
+  const s = total%60;
+  const pad=n=>String(n).padStart(2,'0');
+  return `${pad(h)}:${pad(m)}:${pad(s)}`;
+}
+function tickCountdown(){
+  const end = new Date(SALE.offerEndsAt).getTime();
+  if(!Number.isFinite(end)) return;
+  const left = end - Date.now();
+  const text = formatRemaining(left);
+  document.getElementById('topCountdown').textContent = text;
+  document.getElementById('priceCountdown').textContent = text;
+  if(left <= 0){
+    document.querySelector('.launch').textContent = 'Precio de lanzamiento finalizado';
+    document.querySelector('.price-old').style.display='none';
+    document.querySelector('.price-now').innerHTML = `${moneyARS(SALE.regularPrice)} <small>ARS</small>`;
+    document.querySelector('.sticky-price').textContent = `${moneyARS(SALE.regularPrice)} ARS`;
+  }
+}
+paintSaleConfig();
+tickCountdown();
+setInterval(tickCountdown,1000);
+loadPublicConfig();
+
+/* PERSONAS VIENDO LA PÁGINA
+   Producción: cuenta sesiones activas reales mediante Netlify Blobs.
+   ?preview=1: muestra una simulación únicamente para revisar el diseño.
+*/
+let previewViewerCount = 56;
+const viewerSessionId = (() => {
+  try{
+    let id = sessionStorage.getItem('ddcc_viewer_id');
+    if(!id){
+      id = (crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(36).slice(2) + Date.now().toString(36));
+      sessionStorage.setItem('ddcc_viewer_id', id);
+    }
+    return id;
+  }catch(e){
+    return Math.random().toString(36).slice(2) + Date.now().toString(36);
+  }
+})();
+
+function paintViewerCount(count){
+  const label = count === 1 ? 'persona viendo esta página ahora' : 'personas viendo esta página ahora';
+  document.getElementById('viewerCount').textContent = count;
+  document.getElementById('priceViewerCount').textContent = count;
+  document.querySelector('#topViewer span:last-child').innerHTML = `<strong id="viewerCount">${count}</strong> ${label}`;
+  document.querySelector('#priceViewer span:last-child').innerHTML = `<strong id="priceViewerCount">${count}</strong> ${label}`;
+  document.getElementById('topViewer').classList.add('show');
+  document.getElementById('priceViewer').classList.add('show');
+}
+
+async function updateViewers(){
+  try{
+    let count;
+    if(previewMode){
+      const delta = Math.random() < .5 ? -1 : 1;
+      previewViewerCount = Math.max(48, Math.min(62, previewViewerCount + delta));
+      count = previewViewerCount;
+    }else{
+      const res = await fetch(CONFIG.liveViewerEndpoint,{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({sessionId:viewerSessionId}),
+        cache:'no-store'
+      });
+      if(!res.ok) throw new Error('viewer endpoint unavailable');
+      const data = await res.json();
+      count = Math.round(Number(data.count));
+      if(!Number.isFinite(count) || count < 1) throw new Error('invalid viewer count');
+    }
+    paintViewerCount(count);
+  }catch(e){
+    document.getElementById('topViewer').classList.remove('show');
+    document.getElementById('priceViewer').classList.remove('show');
+  }
+}
+updateViewers();
+setInterval(updateViewers, previewMode ? 7000 : 20000);
+
+/* QUIZ */
+(function(){
+  const questions=[...document.querySelectorAll('.question')];
+  let current=0;
+  const answers={};
+  questions.forEach((q,idx)=>{
+    q.querySelectorAll('.option').forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        answers[idx]=btn.dataset.value || btn.textContent.trim();
+        q.classList.remove('active');
+        current++;
+        if(current<questions.length){
+          questions[current].classList.add('active');
+          const pct=Math.round(((current+1)/questions.length)*100);
+          document.getElementById('qCount').textContent=`Pregunta ${current+1} de ${questions.length}`;
+          document.getElementById('qPct').textContent=`${pct}%`;
+          document.getElementById('qProgress').style.width=`${pct}%`;
+        }else{
+          document.getElementById('quizBody').style.display='none';
+          const first=(answers[0]||'respuestas cada vez más cortas').toLowerCase();
+          const fear=(answers[3]||'que la distancia siga creciendo').toLowerCase();
+          document.getElementById('quizCopy').innerHTML=`Hoy te encuentras con <strong>${first}</strong> y lo que más pesa por dentro es <strong>${fear}</strong>. Eso no demuestra que hayas fallado como padre o madre. Sí muestra que conviene dejar de perseguir información y empezar a reconstruir seguridad. Ese es exactamente el trabajo del manual.`;
+          document.getElementById('quizResult').classList.add('show');
+        }
+      });
+    });
+  });
+})();
+
+/* STICKY CTA */
+(function(){
+  const sticky=document.getElementById('stickyBar');
+  window.addEventListener('scroll',()=>{
+    sticky.classList.toggle('show',window.scrollY>650);
+  });
+})();
+
+/* CHECKOUT MERCADO PAGO */
+document.getElementById('buyButton').addEventListener('click',async function(){
+  const btn=this;
+  btn.disabled=true;
+  btn.textContent='Redirigiendo a Mercado Pago…';
+  try{
+    const res=await fetch(CONFIG.checkoutEndpoint,{method:'POST'});
+    const data=await res.json();
+    if(!res.ok || !data.init_point) throw new Error(data.error || 'Sin init_point');
+    location.href=data.init_point;
+  }catch(e){
+    console.error(e);
+    btn.disabled=false;
+    btn.textContent='Quiero acceder al pack completo →';
+    alert('No se pudo iniciar el pago. Intenta nuevamente en unos segundos.');
+  }
+});
+</script>
+</body>
+</html>
