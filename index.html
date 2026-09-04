@@ -228,7 +228,7 @@ footer{background:#10191b;color:rgba(255,255,255,.5);text-align:center;padding:2
 
 <div class="urgency-bar">
   <div class="urgency-inner">
-    <span class="urgency-segment">Precio de lanzamiento termina en <strong id="topCountdown">--:--:--</strong></span>
+    <span class="urgency-segment">Precio actual <strong>$9.999 ARS</strong> · contador de esta visita <strong id="topCountdown">10:00</strong></span>
     <span class="urgency-segment capacity-badge" id="topCapacity">
       <span><strong id="capacityText">8 de 20</strong> cupos tomados</span>
       <span class="capacity-mini" aria-hidden="true"><span id="capacityFill"></span></span>
@@ -460,18 +460,17 @@ footer{background:#10191b;color:rgba(255,255,255,.5);text-align:center;padding:2
 <section class="price" id="precio">
   <div class="wrap price-wrap">
     <div class="price-card">
-      <div class="launch">Precio especial de lanzamiento</div>
-      <div class="deadline" id="priceCountdown">--:--:--</div>
-      <div class="price-old">$14.999 ARS</div>
+      <div class="launch">Precio especial actual · contador de esta visita</div>
+      <div class="deadline" id="priceCountdown">10:00</div>
       <div class="price-now">$9.999 <small>ARS</small></div>
       <div class="price-note">Pago único · acceso inmediato al pack completo</div>
       <div class="price-urgency" id="priceUrgency">
         <div class="price-capacity-head">
-          <span><strong id="priceCapacityText">8 de 20 cupos tomados</strong> a este precio de lanzamiento</span>
+          <span><strong id="priceCapacityText">8 de 20 cupos tomados</strong> con acceso a este precio actual</span>
           <span aria-hidden="true">🔥</span>
         </div>
         <div class="price-capacity-track" aria-hidden="true"><span id="priceCapacityFill"></span></div>
-        <p class="price-capacity-note">Si estabas pensando en entrar, aprovecha ahora antes de que se complete el cupo de lanzamiento.</p>
+        <p class="price-capacity-note">Acceso inmediato al pack completo después del pago.</p>
         <div class="price-live-urgent" id="priceViewer"><span class="live-dot"></span><span><strong id="priceViewerCount">0</strong> personas viendo esta página ahora</span></div>
       </div>
       <ul class="include">
@@ -528,10 +527,8 @@ const CONFIG = {
 };
 
 const SALE = {
-  // Fallback visual. Antes de publicar configura OFFER_ENDS_AT en Netlify.
-  offerEndsAt: '2026-09-02T23:59:59-03:00',
-  regularPrice: 14999,
-  launchPrice: 9999,
+  // Precio fijo hasta que lo cambies manualmente en Netlify.
+  price: 9999,
   cuposTotales: 20,
   cuposTomados: 8
 };
@@ -554,15 +551,11 @@ function paintSaleConfig(){
   if(priceCapacityText) priceCapacityText.textContent = `${taken} de ${total} cupos tomados`;
   if(priceCapacityFill) priceCapacityFill.style.width = `${pct}%`;
   if(taken >= total){
-    document.getElementById('topCapacity').innerHTML = '<span><strong>Cupos de lanzamiento agotados</strong></span>';
-    if(priceCapacityText) priceCapacityText.textContent = 'Cupos de lanzamiento agotados';
-    const note = document.querySelector('.price-capacity-note');
-    if(note) note.textContent = 'El cupo promocional ya se completó.';
+    document.getElementById('topCapacity').innerHTML = '<span><strong>Cupos informados completos</strong></span>';
+    if(priceCapacityText) priceCapacityText.textContent = 'Cupos informados completos';
   }
-
-  document.querySelector('.price-old').textContent = moneyARS(SALE.regularPrice) + ' ARS';
-  document.querySelector('.price-now').innerHTML = `${moneyARS(SALE.launchPrice)} <small>ARS</small>`;
-  document.querySelector('.sticky-price').textContent = `${moneyARS(SALE.launchPrice)} ARS`;
+  document.querySelector('.price-now').innerHTML = `${moneyARS(SALE.price)} <small>ARS</small>`;
+  document.querySelector('.sticky-price').textContent = `${moneyARS(SALE.price)} ARS`;
 }
 
 async function loadPublicConfig(){
@@ -570,45 +563,33 @@ async function loadPublicConfig(){
     const res = await fetch(CONFIG.publicConfigEndpoint,{cache:'no-store'});
     if(!res.ok) throw new Error('config unavailable');
     const data = await res.json();
-    if(data.offerEndsAt) SALE.offerEndsAt = data.offerEndsAt;
-    if(Number.isFinite(Number(data.regularPrice))) SALE.regularPrice = Number(data.regularPrice);
-    if(Number.isFinite(Number(data.launchPrice))) SALE.launchPrice = Number(data.launchPrice);
+    if(Number.isFinite(Number(data.price))) SALE.price = Number(data.price);
+    if(Number.isFinite(Number(data.price))) SALE.price = Number(data.price);
     if(Number.isFinite(Number(data.cuposTotales))) SALE.cuposTotales = Number(data.cuposTotales);
     if(Number.isFinite(Number(data.cuposTomados))) SALE.cuposTomados = Number(data.cuposTomados);
   }catch(e){
     console.warn('Usando configuración visual de respaldo.', e);
   }
   paintSaleConfig();
-  tickCountdown();
 }
 
-/* COUNTDOWN: fecha fija, no se reinicia por visitante. */
-function formatRemaining(ms){
-  if(ms <= 0) return '00:00:00';
-  const total = Math.floor(ms/1000);
-  const h = Math.floor(total/3600);
-  const m = Math.floor((total%3600)/60);
-  const s = total%60;
-  const pad=n=>String(n).padStart(2,'0');
-  return `${pad(h)}:${pad(m)}:${pad(s)}`;
+/* CONTADOR DE ESTA VISITA: se reinicia en 10:00 cada vez que se carga la página.
+   No cambia el precio ni afirma que la oferta expire. */
+let sessionSeconds = 10 * 60;
+function formatSession(total){
+  const m = Math.floor(total / 60);
+  const sec = total % 60;
+  return `${String(m).padStart(2,'0')}:${String(sec).padStart(2,'0')}`;
 }
-function tickCountdown(){
-  const end = new Date(SALE.offerEndsAt).getTime();
-  if(!Number.isFinite(end)) return;
-  const left = end - Date.now();
-  const text = formatRemaining(left);
+function tickSessionCountdown(){
+  const text = formatSession(Math.max(0, sessionSeconds));
   document.getElementById('topCountdown').textContent = text;
   document.getElementById('priceCountdown').textContent = text;
-  if(left <= 0){
-    document.querySelector('.launch').textContent = 'Precio de lanzamiento finalizado';
-    document.querySelector('.price-old').style.display='none';
-    document.querySelector('.price-now').innerHTML = `${moneyARS(SALE.regularPrice)} <small>ARS</small>`;
-    document.querySelector('.sticky-price').textContent = `${moneyARS(SALE.regularPrice)} ARS`;
-  }
+  if(sessionSeconds > 0) sessionSeconds--;
 }
 paintSaleConfig();
-tickCountdown();
-setInterval(tickCountdown,1000);
+tickSessionCountdown();
+setInterval(tickSessionCountdown,1000);
 loadPublicConfig();
 
 /* PERSONAS VIENDO LA PÁGINA
