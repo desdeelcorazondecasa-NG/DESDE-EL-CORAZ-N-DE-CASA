@@ -223,6 +223,26 @@ footer{background:#10191b;color:rgba(255,255,255,.5);text-align:center;padding:2
   body{padding-top:82px}.urgency-bar{height:82px}.urgency-inner{padding:7px 10px;font-size:.70rem;gap:5px 8px;flex-wrap:wrap;justify-content:center;align-content:center}.urgency-segment:first-child{flex-basis:100%;justify-content:center}.urgency-segment + .urgency-segment{padding-left:8px}.capacity-mini{width:40px}.viewer-badge.show{display:flex}.hero{padding:58px 0 52px}.wrap{padding:0 18px}section{padding:58px 0}.hero h1{font-size:2.65rem}.hero .lead{font-size:1.04rem}.hero-card{padding:22px}.pain-grid,.compare,.options,.steps{grid-template-columns:1fr}.pain-callout{grid-template-columns:1fr}.quiz-shell{padding:24px 19px}.resource{padding:21px}.price-card{padding:27px 21px}.price-now{font-size:2.75rem}.sticky{justify-content:space-between}.sticky .btn{width:auto}
 }
 </style>
+
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1450779470197678');
+fbq('track', 'PageView');
+</script>
+<noscript>
+  <img height="1" width="1" style="display:none"
+       src="https://www.facebook.com/tr?id=1450779470197678&ev=PageView&noscript=1" />
+</noscript>
+<!-- End Meta Pixel Code -->
+
 </head>
 <body>
 
@@ -689,16 +709,34 @@ setInterval(updateViewers, previewMode ? 7000 : 20000);
   });
 })();
 
-/* CHECKOUT MERCADO PAGO */
+/* CHECKOUT MERCADO PAGO + META PIXEL */
 document.getElementById('buyButton').addEventListener('click',async function(){
   const btn=this;
   btn.disabled=true;
   btn.textContent='Redirigiendo a Mercado Pago…';
+
   try{
     const res=await fetch(CONFIG.checkoutEndpoint,{method:'POST'});
     const data=await res.json();
-    if(!res.ok || !data.init_point) throw new Error(data.error || 'Sin init_point');
+
+    if(!res.ok || !data.init_point){
+      throw new Error(data.error || 'Sin init_point');
+    }
+
+    /* META PIXEL — intención real de checkout
+       Se dispara solo cuando Mercado Pago ya devolvió una URL válida. */
+    if(typeof fbq === 'function'){
+      fbq('track','InitiateCheckout',{
+        value:Number(SALE.price) || 9999,
+        currency:'ARS',
+        content_ids:['mama-papa-pack'],
+        content_type:'product',
+        num_items:1
+      });
+    }
+
     location.href=data.init_point;
+
   }catch(e){
     console.error(e);
     btn.disabled=false;
